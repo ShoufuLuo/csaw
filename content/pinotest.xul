@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://pinocchio/skin/pino.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://pinocchio/locale/overlay.dtd">
+<window  id="pino-mainw" title="Pinocchio Test!" onload="pinotest.load()"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<script src="chrome://pinocchio/content/pinotest.js"/>
+
+	<!-- Headline: User information -->
+	<html:div id="pino-headerline">Welcome! </html:div>
+	<html:hr/>
+
+	<html:div id="pino-comments"></html:div>
+	<html:div id="pino-buttons">
+	<button id="pino-button-1" onclick="pinotest.showComments();">From All</button>
+	<button id="pino-button-2" onclick="pinotest.showSelectedComments();">From My Buddy</button>
+	<button id="pino-button-3" onclick="pinotest.addComment();">Test to Add Comment</button>
+	</html:div>
+
+	<html:hr/>
+	<textbox id="pino-input" multiline="true" rows="2"/>
+	<html:hr/>
+	
+	<!-- Foot: more informaiton about this web page -->
+	<html:div id="pino-foot">Security Level: Medium </html:div>
+</window>

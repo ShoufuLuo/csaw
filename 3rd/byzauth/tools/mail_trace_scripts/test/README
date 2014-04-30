@@ -1,0 +1,2 @@
+./synthetic_trace.py 100 10000 > test/mesgtrace.txt
+./bootstrapping.py test/mesgtrace.txt 10 balance > test/bootstrapping.txt

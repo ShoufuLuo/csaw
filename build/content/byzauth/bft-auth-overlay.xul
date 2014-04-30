@@ -1,0 +1,54 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<overlay id="bft-auth" 
+   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+   <script type="application/x-javascript" src="chrome://bft-auth/content/bft-address-parser.js"/>
+   <script type="application/x-javascript" src="chrome://bft-auth/content/bft-auth-overlay.js"/>
+   <script type="application/x-javascript">
+   <![CDATA[
+         window.addEventListener('load', BftAuthInit, false);  
+     ]]>
+   </script> 
+
+
+	<!--
+		* Create a popup in tools menu to get all authentication related information in one shot
+		-->
+   <menupopup id="taskPopup" >
+      <menuseparator/>
+      <menu id="bft-auth-popup-root" label = "Sender Authentication">
+         <menupopup id="bft-auth-popup">
+            <menuitem id="bft-auth-showmesgstatus" label="Message Authentication Status"  oncommand = "BftAuth_show_mesgstatus();" accesskey="m" disabled="true" />
+            <menuitem id="bft-auth-contacts" label="Show Trusted Peers"  accesskey="p" oncommand = "BftAuth_show_contacts();" />
+            <menuitem id="bft-auth-settings" label="Sender Authentication Settings" accesskey="s" oncommand="BftAuth_Settings();"/>
+            <menuitem id="bft-auth-genkey" label="Clear Authentication State" accesskey="c" oncommand = "BftAuth_clear();" />
+            <menuitem id="bft-auth-about" label="About" accesskey="a" oncommand = "BftAuth_about();" />
+         </menupopup>
+      </menu>
+   </menupopup>
+
+	<!--
+		Right click on message list : add an item showing message authentication status
+	-->
+   <popup id="threadPaneContext" >
+   	<menuseparator/>
+   	<menuitem id="bft-auth-showmesgstatus-frompopup" label="Message Authentication Status"  oncommand = "BftAuth_show_mesgstatus_frompopup(event);"/>
+   </popup> 
+   
+</overlay>
+
+
+
+
+<!-- TODO 
+   1.  Move all of the buttons onto a better submenu bar that pops up on click 
+   a good sample is there in offline overlay 
+
+   2. Check if dtds can be made to work; for now we avoided complication of dtd 
+   and command sets and just used the js as external 
+
+   3.  Also in future do we want to download javascript remotely? 
+   Apparently it is allowed 
+ -->

@@ -1,0 +1,31 @@
+
+window#pino-mainw {
+    width: 400px;
+;    height: 200px;
+}
+
+div#pino-headerline {
+    height: 20px;
+}
+
+div#pino-comments {
+    height: 100px;
+}
+
+div#pino-buttons {
+    height: 20px;
+}
+
+div#pino-input {
+    height: 60px;
+    width: 300px;
+}
+
+div#pino-foot {
+    height: 20px;
+}
+
+button#pino-addcmmt-button {
+    width: 25px;
+}
+

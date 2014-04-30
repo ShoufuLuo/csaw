@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+
+<dialog
+   id="bft-auth-showmesgstatus-dialog"
+   title="Sender Authentication Message Status"
+   width = "400" 
+   height = "170" 
+   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   buttons = "accept" 
+   ondialogaccept="return doMesgStatusOK();" 
+   onload ="return doMesgStatusLoad();" 
+   flex = "1">
+
+      <script>
+      function doMesgStatusOK()
+      {
+         return true;
+      }
+      function doMesgStatusLoad()
+      {
+         var gbox = document.getElementById('bft-auth-mesg-status-listbox');
+         gbox.appendItem( window.arguments[0], 'sogned-status' ) ; 
+         gbox.appendItem(  window.arguments[1], 'verified-status' ) ; 
+         gbox.appendItem(  window.arguments[2], 'auth-status' ) ; 
+      }
+      </script>
+
+
+   <dialogheader title="Message Authentication Status" description="" flex="1"/>
+   <hbox flex="1"> 
+      <listbox rows="3" flex="1"> 
+           <listitem label="Digitally Signed"/>
+           <listitem label="Signature Verified"/>
+           <listitem label="Signer Authenticated"/>
+      </listbox> 
+      <listbox id="bft-auth-mesg-status-listbox" rows = "3" flex="1"/>
+   </hbox>
+
+</dialog>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://pinocchio/skin/overlay.css" type="text/css"?>
+<!DOCTYPE page SYSTEM "chrome://pinocchio/locale/pinocchio.dtd">
+
+<page id="PinoSidebarPage" title="&pino.sidebar.title;"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	onload="pino.sidebar.onLoad();">
+	<script src="chrome://pinocchio/content/pino-overlay.js"/>
+	<script src="chrome://pinocchio/content/jquery-1.7.1.js"/>
+
+	<script type="text/javascript">
+	var access_token;
+
+	hello_iframe = function () {
+		//alert("welcome, back!");
+	}
+	
+	 show_token = function (token)
+	 {
+		var tokendiv = document.getElementById("token");
+		var tokentxt = document.createTextNode(token);
+    
+		access_token = token;
+		tokendiv.appendChild(tokentxt);
+	 }
+	
+	var today = new Date();
+	</script>
+	<vbox flex="1" width="80%" style="overflow:">
+		<description><script type="text/javascript">document.write(today);</script></description>
+		<hbox>
+		<image id="PinoSidebarButton"/>
+		<description style="overflow:auto"> Hey, this is really awsome restanruant! Low price, nice setting, good taste!</description>
+		</hbox>
+		<hbox><button width="60" class="dialog" label="Like" accesskey="t"/><button class="dialog" width="60" label="Unlike" accesskey="t"/></hbox>
+		<hbox>
+		<image id="PinoSidebarButton"/>
+		<description>Alice: Hey Bob, I like the food, but it is too noise around dinner time.</description>
+		</hbox>
+		<hbox><button class="dialog" label="Like" accesskey="t"/><button class="dialog" label="Unlike" accesskey="t"/></hbox>
+		<hbox>
+		<image id="PinoSidebarButton"/> </hbox>
+		<hbox>
+		<button class="dialog" label="Recommend " accesskey="t"/><button class="dialog" label="Bookmark" accesskey="t"/>
+		</hbox>
+	</vbox>
+ 		<!--<html:div id="pino" style="width:80%">Today: <script type="text/javascript">document.write(today);</script></html:div>
+ 		<html:div id="token" style="width:80%"></html:div>
+		<html:div id="pino-comments" style="width:80%; align:center">
+			<html:p><html:a href="www.google.com">Bob</html:a>: Hey, this is really awsome restanruant! Low price, nice setting, good taste!</html:p>
+			<html:hr/>
+			<html:p><html:a href="www.stevens.edu">Alice</html:a>: Bob, I like the food, but it is too noise around dinner time.</html:p>
+			<html:hr/>
+			<html:p><html:a href="www.stevens.edu">Eric</html:a>: Hey, guys. There is anohter one, much better than this. Here is the link: www.dinnerplaceathoboken.com.</html:p>
+			<html:hr/>
+		</html:div-->
+	<!-- html:iframe id="facebook_login" height="50" flex="1" type="content" frameborder="0" 
+		src="http://personal.stevens.edu/~sluo2/osn/iframe.html"/ -->
+</page>

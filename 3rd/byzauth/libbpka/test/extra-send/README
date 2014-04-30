@@ -1,0 +1,28 @@
+
+
+Goal : rerun the earlier completion experiments with extra messages
+sent at the precise moment the protocol is going to send messages.  
+
+Older programs:  /home/vpathak/source/old/analysis/completion.py and 
+omptimistic.py were the programs that ran the required completion 
+statistics.  These should be rerun on new program if it satisifes the 
+required log format for capturing stats even after new messages are 
+added to the trace. 
+
+How are the plots generated in the past: 
+/home/vpathak/source/old/experiment.lucy/Makefile
+
+Need to make changes to this Makefile to gather the whole tradeoff 
+and to plot it accurately. 
+
+testing stage: cat /data/email_traces/extra_send/extra.1/authentication.log | ./completion.py > testadd.dat 
+
+
+BUG: Why time axis goes till 2M and more.  when we are trying to do calculation
+till 90 days only?
+
+
+Trial: 
+./testprotocol_extrasend ./bsg.dat ./mesglog4.txt 10 1500000 100 32 86400  
+./testprotocol3 ./bsg.dat ./mesglog4.txt 10 1500000 100 32 
+

@@ -1,0 +1,144 @@
+3/23/2008
+Seems to work fine. Takes too much time in grep EnqueFromLib * 
+Can we do a count or quick fun that shows nothing to be done
+and have a quick exit path ?
+
+error : our test program is the lazy one.  retrying with 
+eager one as follows : 
+./testprotocol2 bs.txt trace.txt 8 8 100000
+
+
+
+
+3/18/2008 
+
+Checked eager protocol with various times of resending out 
+messages among the clients 
+
+got a result that shows improved converegence with smaller and
+smaller times of resend  
+
+
+
+3/16/2008 
+Implementing the stuff. firstly spend some time checking there is no 
+bug 
+
+if you run with verification (which we wont for experiment), the program has 
+a assertion failure. default parameters of Makefile are good enough to generate it
+however it is not visible throuth make test 
+ 
+./testprotocol3 bs.txt trace.txt 8 1000000 100 30
+testprotocol3: proxypeer.cpp:37: bool ProxyPeer::send(Message*): Assertion `!!m->signature' failed.
+
+maybe caused by some kind of memory corruption.  trying to valgrind 
+valgrind --db-attach=yes --num-callers=100 ./testprotocol3  bs.txt trace.txt 8 1000000 100 30
+
+
+
+
+
+
+
+3/14/2008 
+
+After the meeting ideas 
+
+Why not assume that protocol can make progress whenever people read their email (note 
+that they dont need to write email in order to read it).  
+
+This makes most of the changes done in the week of 3/13 useless.  Need to redo that part
+according to the goal below.  Also perhaps try to ensure that there is not bug 
+
+
+
+3/13/2008 
+
+Trying to complete simulation with extra sends enabled.  Note that 
+this is synthetic data and not the real one 
+
+1. Run without extra send 
+eg: <bsfile> <msgtrace> <tgs> <expiryinterval> <nmesgayload> <keysz> 
+./testprotocol3 bs.txt trace.txt 8 1000000 100 30
+cp /tmp/authentication.log ./noextra-authentication.log
+rm /tmp/authentication.log 
+rm -rf peerdata/
+
+
+2. Run with extra send 
+eg: <bsfile> <msgtrace> <tgs> <expiryinterval> <nmesgayload> <keysz> <retryinterval>
+./testprotocol_extrasend bs.txt trace.txt 8 1000000 100 30 100000
+
+
+Compare:  
+/data/email_traces/extra_send_simple/completion.py noextra-authentication.log > noextra.dat 
+/data/email_traces/extra_send_simple/completion.py authentication_extra_send.log > extra.dat
+gnuplot> set xrange[0:1000000]
+gnuplot> plot 'extra.dat' using 1:2 with linespoints, 'noextra.dat' using 1:2 with linespoints
+ 
+
+
+3. Extra send with no limit on send size (?)
+
+
+
+
+
+
+
+
+
+
+3/2/8 
+Trying to rerun a test run and confirm everything works fine.  
+./synthetic_trace.py 16 10000 > ./trace.txt
+../../tools/mail_trace_scripts/bootstrapping.py trace.txt 8 random > bs.txt
+./testprotocol3 bs.txt trace.txt 8 1000000 100 30
+
+Crashed at message 307. 
+
+
+
+
+Probably from 8/2007
+>>>>>>> .r205
+ at self.cpp:35
+
+[vpathak@orion test]$ ./testprotocol3 /tmp/bs.txt /tmp/test.trc 6 1000000 100 30
+loaded trust groups
+trimmed messages in trace 10 peers left 
+*** glibc detected *** ./testprotocol3: double free or corruption (top): 0x08d96218 ***
+
+
+
+
+
+
+
+
+The goal is to measure performance of the system we have implemeted. 
+So the prrior question would be what is the system we implemented. 
+
+The protocol is well defined.  However selection of bootstrapping group
+is not.  
+
+We do not know the address books of people so it cannot be taken from 
+address book (although it might be so in the long run). 
+
+For now we have to approximate the address book.  This can possibly be 
+done by finding who is in close communication with who. 
+
+For example receive, send sequences of n or more.  Can we find out how 
+this variable n affects the size of address book deduced.  
+
+There are two variable here, one is the communicative manner of the 
+sender and also the n steps that are chosen. 
+
+The data should then indicate what is the base trusted group.
+
+
+
+
+Using the distributions etc we have a logic to determine bootstrapping groups. 
+We have it here:
+cp /data/email_traces/cs.rutgers.edu/address_book_study/90days.mbox ~/source/libbyzauth/test/bootstrap.txt

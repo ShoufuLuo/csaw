@@ -1,0 +1,76 @@
+
+						Credible & Social-Annotated Web Content (Pinocchio)
+
+0. Source Code
+	svn co https://csaw.googlecode.com/svn/trunk csawc
+
+1. How to build:
+
+	1) Chimera (We fix a few bugs for the original version from UCSB Chimera 1.2)
+		a. download
+			svn co https://svn.code.sf.net/p/pinocchio/lib/chimera/trunk  ../chimera
+		b. compile
+			cd ../chimera
+			./configure
+			make
+
+	2) Byzauth
+
+		a. Openssl 0.9.8 https://www.openssl.org
+
+		b. C++ Boost Serialization Library
+			For ubuntu: sudo apt-get install libboost-serialization1.46-dev
+
+		c. download byzauth source code 
+			svn co https://byzauth.svn.sourceforge.net/svnroot/byzauth/trunk/byzauth ../byzauth
+		d. comiple
+			cd ../byzauth/libppka
+			make clean
+			make
+
+	3) xulrunner-sdk 
+		a. download from https://developer.mozilla.org/en/Gecko_SDK
+			(Gecko 8.0 recommended)
+	
+		b. untar to the same level directory as chimera 
+			tar jxvf xulrunner-8.0.1.en-US.mac-x86_64.sdk.tar.bz2 
+
+		e.g:
+			Mac OSX Lion 10.7.2: xulrunner-8.0.1.en-US.mac-x86_64.sdk.tar.bz2	
+			Ubuntu 11.10:  xulrunner-8.0.1.en-US.linux-i686.sdk.tar.bz2	
+
+	4) Build XPCOM 
+		./xpcom_build.sh
+
+	5) Build Pinocchio
+		- For Mac OS X	
+			./build_mac.sh
+		- For Linux
+			./build.sh	
+
+2. How to test: 1/1/2012
+
+	a. open a terminal
+		cd ../chimera
+		make clean
+		make
+		cd test
+		./test 7117 vpathak@stevens.edu
+
+	b. open another terminal
+		- Ubuntu:  
+			/usr/bin/firefox
+		- Mac OSX:  
+			/Application/Firefox.app/Contents/MacOS/firefox
+
+	c. p2p_proxy_init() : xpcom_chimera/proxy.c 
+
+	   *****PS: I try to call a function of xpcom_demo from xpcom_chimera
+
+Note:
+* If you put libraries(chimera, boost and byzauth) elsewhere, you should change the configuration in make.def to point the CHIMERA_LIB, BOOST_LIB and BYZAUTH_LIB to the place you put them respectively. 
+
+	
+
+ Shoufu Luo
+ Jan 1, 2012

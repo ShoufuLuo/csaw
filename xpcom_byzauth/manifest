@@ -1,0 +1,3 @@
+interfaces		IByzauthAdapter.xpt 
+binary-component 	libbyzauth.dylib 
+category		profile-after-change	ByzantineAuthentication	@rutgers.edu/XPCOM/ByzauthAdapter;1

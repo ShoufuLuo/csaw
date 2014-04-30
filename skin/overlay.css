@@ -1,0 +1,19 @@
+menuitem#pinocchio-hello {
+  color: red !important;
+}
+
+/* common style for all custom buttons */
+.custombutton                  
+  {-moz-image-region: rect( 0px 16px 16px  0px);}
+
+#PinoSidebarButton {
+  list-style-image: url("chrome://pinocchio/skin/button-1.png");
+  -moz-image-region: rect( 0px 16px 16px  0px);
+}
+
+A:link {text-decoration:none}
+A:visited {text-decoration:none;color:blue;}
+A:active {text-decoration:none;color:blue;}
+A:hover {text-decoration:underline;color:#A32638;}
+
+div.div1 {font: 13.0px 'Times New Roman";}

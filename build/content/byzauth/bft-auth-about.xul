@@ -1,0 +1,32 @@
+<?xml version="1.0"?> 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<dialog
+   id="bft-auth-about-dialog"
+   title="About Sender Authentication"
+   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   buttons = "accept" 
+   ondialogaccept="return doBftAuthOK();" >
+      <script>
+      function doBftAuthOK()
+      {
+         return true;
+      }
+      </script>
+      <dialogheader title="Sender Authenticating Mail" description="version 0.9 released March 26, 2007"/>
+      <vbox flex="1">
+         <description width="450" >
+            Sender Authenticated Mail plugin for Thunderbird and Sea-Monkey mail clients implements 
+            automatic sender authentication for email.  
+         </description> 
+         <description width="450" >
+            Sender authentication is implemented by running Byzantine Fault Tolerant Public Key Authentication 
+            protocol as an overlay on the mail transfer protocol.  The authentication mechanism 
+            operates correctly if majority of the peers are honest.  The authentication mechanism is automatic, 
+            tolerates malicious peers, and is backward compatible with all email clients.
+         </description>
+         <description width="450" > 
+            For further details, please see the project web page at http://discolab.rutgers.edu/ba/
+         </description>
+      </vbox>
+</dialog>

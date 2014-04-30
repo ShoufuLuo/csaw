@@ -1,0 +1,28 @@
+
+GECKO_SDK_PATH = ../../xulrunner-sdk
+BYZAUTH_LIB = ../../byzauth
+CHIMERA_LIB = ../../chimera
+
+CXX   = g++
+MAKE  = make
+CPPFLAGS = -g -Wall -Os -fno-rtti -fno-exceptions -fstack-protector-all
+
+OS=$(shell uname -s)
+ifeq ($(OS),Darwin) # Mac OS X
+	DYLIB_SUFFIX = dylib
+	BOOST_LIB = /opt/local/lib
+	LDFLAGS += -dynamiclib -fPIC
+endif
+
+ifeq ($(OS),Linux)
+	DYLIB_SUFFIX = so
+	BOOST_LIB = /usr/lib
+	LDFLAGS += -shared -fPIC -Wl,-z,defs 
+endif
+
+GECKO_CONFIG_INCLUDE = -include mozilla-config.h 
+GECKO_DEFINES  = -DXPCOM_GLUE
+GECKO_INCLUDES = -I$(GECKO_SDK_PATH)/include -I$(GECKO_SDK_PATH)/bin
+GECKO_INCLUDES += -I$(GECKO_SDK_PATH)/idl -I$(GECKO_SDK_PATH)/include
+
+GECKO_LDFLAGS = -L$(GECKO_SDK_PATH)/lib -lxpcomglue_s -L$(GECKO_SDK_PATH)/bin -lxpcomglue -lxpcom -lnspr4 -lplds4 -lmozalloc -ldl

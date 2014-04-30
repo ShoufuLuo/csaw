@@ -1,0 +1,60 @@
+<!--
+ *  Copyright (c) 2012 Stevens Institute of Technology. 
+ *  
+ *  All rights reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *	Author: Vivek Pathak
+ * 	Mon Jan 2 6:36:10 EDT 2012 
+ *
+-->
+
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+
+<dialog
+   id="bft-auth-settings-dialog"
+   title="Sender Authentication Settings"
+   width = "450" 
+   height = "250"
+   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   buttons = "accept,cancel"
+   buttonlabelcancel="Cancel"
+   buttonlabelaccept="Save" 
+   ondialogaccept="return doBftSettingsOK();" 
+   ondialogcancel="return doBftSettingsCancel();" 
+   onload="onBftSettingsLoad();">
+
+   <script type="application/x-javascript" src="chrome://pinocchio/content/byzauth/bft-auth-settings.js"/>
+   <dialogheader title="Sender Authentication Settings" description=""/>
+   <vbox>
+      <hbox align="center" flex="1">
+         <label control="ttl-text" value="Time to Live for Overlay Messages (days)"  flex="1"/>
+         <textbox id="ttl-text-textbox" style="width: 100px;"/>
+      </hbox>
+      <hbox align="center" flex="1"> 
+         <label control="tgs-text" value="Trust Group Size (peers)"  flex="1"/>
+         <textbox id="tgs-text-textbox" style="width: 100px;"/>   
+      </hbox>
+      <hbox align="center" > 
+         <label control="payload-text" value="Payload for Overlay (messages)"  flex="1"/>
+         <textbox id="payload-text-textbox" style="width: 100px;"/>   
+      </hbox> 
+      <hbox align="center"> 
+         <label control="keylen-text" value="Public Key Length (bits)"  flex="1"/>
+         <textbox id="keylen-text-textbox" style="width: 100px;"/>   
+      </hbox> 
+   </vbox>
+</dialog>

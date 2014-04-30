@@ -1,0 +1,285 @@
+AckEntry	./include/network.h	/^}AckEntry;$/
+Bool	./include/include.h	/^typedef int Bool;$/
+CacheEntry	./src/host.c	/^} CacheEntry;$/
+ChimeraGlobal	./include/chimera.h	/^} ChimeraGlobal;$/
+ChimeraHost	./include/chimera.h	/^typedef void (*chimera_forward_upcall_t) (Key **, /
+ChimeraState	./include/host.h	/^} ChimeraState;$/
+DhtMessage	./test/dht.h	/^}DhtMessage;$/
+Dllist	./include/dllist.h	/^} *Dllist;$/
+FREE	./include/priqueue.h	/^#define FREE(x)  free(x) ; x = NULL            \/*/
+Host	./test/bigtest.c	/^} Host;$/
+HostGlobal	./src/host.c	/^} HostGlobal;$/
+JRB	./include/jrb.h	/^} *JRB;$/
+JobArgs	./include/job_queue.h	/^} JobArgs;$/
+Jval	./include/jval.h	/^} Jval;$/
+Key	./include/key.h	/^} Key;$/
+LEFT	./include/priqueue.h	/^#define LEFT(x)  (2*x)                         \/*/
+List	./include/job_queue.h	/^} List;$/
+Mbighost	./test/bighost.c	/^int main (int argc, char **argv)$/
+Mbignode	./test/bignode.c	/^int main (int argc, char **argv)$/
+Mbigtest	./test/bigtest.c	/^int main (int argc, char **argv)$/
+Mbigtest_ssh	./test/bigtest_ssh.c	/^int main (int argc, char **argv)$/
+Mchat	./test/chat.c	/^int main (int argc, char **argv)$/
+Mdhttest	./test/dhttest.c	/^int main (int argc, char **argv)$/
+Message	./include/chimera.h	/^typedef void (*chimera_deliver_upcall_t) (Key *, M/
+MessageGlobal	./src/message.c	/^} MessageGlobal;$/
+MessageProperty	./src/message.c	/^} MessageProperty;$/
+Mjob_test	./test/job_test.c	/^int main ()$/
+Mkeygen	./test/keygen.c	/^main (int argc, char **argv)$/
+Mmonitor	./test/monitor.c	/^int main (int argc, char **argv)$/
+Mreceiver	./test/receiver.c	/^int main (int argc, char **argv)$/
+Mrouting	./test/routing.c	/^int main ()$/
+Msender	./test/sender.c	/^int main (int argc, char **argv)$/
+Msha1_keygen	./test/sha1_keygen.c	/^main (int argc, char *argv[])$/
+Mtest	./src/test.c	/^int main (int argc, char **argv)$/
+NetworkGlobal	./src/network.c	/^} NetworkGlobal;$/
+PARENT	./include/priqueue.h	/^#define PARENT(x) (x\/2)                        \//
+PQEntry	./include/network.h	/^}PQEntry;$/
+RAND	./test/dht.c	/^#define RAND() (lrand48())$/
+RIGHT	./include/priqueue.h	/^#define RIGHT(x) ((2*x)+1)                     \/*/
+RouteGlobal	./include/route.h	/^} RouteGlobal;$/
+SEED	./test/dht.c	/^#define SEED(s) (srand48(s))$/
+SWAP	./include/priqueue.h	/^#define SWAP(t,x,y) tmp = x ; x = y ; y = tmp  \/*/
+Sema	./include/semaphore.h	/^} Sema;$/
+base2_to_hex	./include/base.h	/^void base2_to_hex (char *binstr, char *hexstr)$/
+base4_to_hex	./include/base.h	/^void base4_to_hex (char *base4str, char *hexstr)$/
+binary_heap	./include/priqueue.h	/^} binary_heap ; $/
+bool	./test/dht.h	/^typedef int bool;$/
+busy_cycle	./test/job_test.c	/^void busy_cycle (void *in)$/
+cacheentry_free	./src/host.c	/^void cacheentry_free (CacheEntry * entry)$/
+compare_priority	./src/priqueue.c	/^int compare_priority(node i,node j) {$/
+convert_base16	./include/base.h	/^void convert_base16 (unsigned char num, char *out)/
+convert_base2	./include/base.h	/^void convert_base2 (unsigned char num, char *out)$/
+convert_base4	./include/base.h	/^void convert_base4 (unsigned char num, char *out)$/
+count_print	./test/job_test.c	/^void count_print (void *in)$/
+create_trees	./test/monitor.c	/^void create_trees (JRB hosts)$/
+dalarm	./src/dtime.c	/^void dalarm (double time)$/
+del	./test/bigtest.c	/^void del (ChimeraState * chstate, Message * msg)$/
+delete_item	./src/jrb.c	/^static void delete_item (JRB item)	\/* Deletes an /
+dht_put	./test/dht.c	/^void dht_put(char *block)$/
+dll_append	./src/dllist.c	/^void dll_append (Dllist l, Jval val)	\/* Inserts a/
+dll_delete_node	./src/dllist.c	/^void dll_delete_node (Dllist node)	\/* Deletes an /
+dll_empty	./src/dllist.c	/^int dll_empty (Dllist l)$/
+dll_first	./include/dllist.h	/^#define dll_first(d) ((d)->flink)$/
+dll_insert_a	./src/dllist.c	/^void dll_insert_a (Dllist n, Jval val)	\/* Inserts/
+dll_insert_b	./src/dllist.c	/^void dll_insert_b (Dllist node, Jval v)	\/* Insert/
+dll_last	./include/dllist.h	/^#define dll_last(d) ((d)->blink)$/
+dll_next	./include/dllist.h	/^#define dll_next(d) ((d)->flink)$/
+dll_nil	./include/dllist.h	/^#define dll_nil(d) (d)$/
+dll_prepend	./src/dllist.c	/^void dll_prepend (Dllist l, Jval val)	\/* Inserts /
+dll_prev	./include/dllist.h	/^#define dll_prev(d) ((d)->blink)$/
+dll_rtraverse	./include/dllist.h	/^#define dll_rtraverse(ptr, list) \\$/
+dll_traverse	./include/dllist.h	/^#define dll_traverse(ptr, list) \\$/
+dll_val	./src/dllist.c	/^Jval dll_val (Dllist l)$/
+dsleep	./src/dtime.c	/^void dsleep (double time)$/
+dtime	./src/dtime.c	/^double dtime ()$/
+dtotv	./src/dtime.c	/^struct timeval dtotv (double d)$/
+find_closest_key	./src/route.c	/^ChimeraHost *find_closest_key (void *state, Chimer/
+free_dllist	./src/dllist.c	/^void free_dllist (Dllist l)$/
+free_node	./src/job_queue.c	/^void free_node (node * n)$/
+fwd	./test/bigtest.c	/^void fwd (ChimeraState * chstate, Message * msg)$/
+get_hex_digit_from_base4	./include/base.h	/^char *get_hex_digit_from_base4 (char *base4str)$/
+get_hex_digit_from_bin	./include/base.h	/^char *get_hex_digit_from_bin (char *binstr)$/
+get_key_string	./src/key.c	/^char *get_key_string (Key * key)$/
+get_new_ackentry	./src/network.c	/^AckEntry* get_new_ackentry()$/
+get_new_dhtmessage	./test/dht.h	/^DhtMessage* get_new_dhtmessage(char *blockId)$/
+get_new_pqentry	./src/network.c	/^PQEntry* get_new_pqentry()$/
+gethostinfo	./src/route.c	/^void gethostinfo (ChimeraHost * CHost)$/
+getlext	./src/jrb.c	/^#define getlext(n) ((struct jrb_node *)(n->key.v))/
+getrext	./src/jrb.c	/^#define getrext(n) ((struct jrb_node *)(n->val.v))/
+handle_chat	./test/chat.c	/^void handle_chat (Message * message)$/
+handle_join	./test/chat.c	/^void handle_join (Message * message)$/
+handle_shout	./test/chat.c	/^void handle_shout (Message * message)$/
+heap_delete	./src/priqueue.c	/^void heap_delete(binary_heap *a,int i) {$/
+heap_extract_max	./src/priqueue.c	/^node heap_extract_max(binary_heap *a) {$/
+heap_finalize	./src/priqueue.c	/^void heap_finalize(binary_heap *a) { FREE(a->eleme/
+heap_increase_key	./src/priqueue.c	/^void heap_increase_key(binary_heap *a,int i,priori/
+heap_initialize	./src/priqueue.c	/^void heap_initialize(binary_heap *a,int nodes) { $/
+heap_insert	./src/priqueue.c	/^void heap_insert(binary_heap *a,node key) {$/
+heap_max	./src/priqueue.c	/^node_ptr heap_max(binary_heap *a) { $/
+heapify	./src/priqueue.c	/^void heapify(binary_heap *a,int i) {$/
+hello	./test/bigtest.c	/^void hello (ChimeraState * chstate, Message * msg)/
+hex_to_base2	./include/base.h	/^void hex_to_base2 (char *hexstr, char *binstr)$/
+hex_to_base4	./include/base.h	/^void hex_to_base4 (char *hexstr, char *base4str)$/
+hexalpha_to_int	./src/route.c	/^int hexalpha_to_int (int c)$/
+host_decode	./src/host.c	/^ChimeraHost *host_decode (ChimeraState * state, ch/
+host_encode	./src/host.c	/^void host_encode (char *s, int len, ChimeraHost * /
+host_get	./src/host.c	/^ChimeraHost *host_get (ChimeraState * state, char /
+host_init	./src/host.c	/^void *host_init (void *logs, int size)$/
+host_release	./src/host.c	/^void host_release (ChimeraState * state, ChimeraHo/
+host_update_stat	./src/host.c	/^void host_update_stat (ChimeraHost * host, int suc/
+insert	./src/jrb.c	/^static void insert (JRB item, JRB list)	\/* Insert/
+int	./include/chimera.h	/^typedef void (*chimera_update_upcall_t) (Key *, Ch/
+isblack	./src/jrb.c	/^#define isblack(n) (!isred(n))$/
+isext	./src/jrb.c	/^#define isext(n) (!isint(n))$/
+ishead	./src/jrb.c	/^#define ishead(n) (n->roothead & 2)$/
+isint	./src/jrb.c	/^#define isint(n) (n->internal)$/
+isleft	./src/jrb.c	/^#define isleft(n) (n->left)$/
+isred	./src/jrb.c	/^#define isred(n) (n->red)$/
+isright	./src/jrb.c	/^#define isright(n) (!isleft(n))$/
+isroot	./src/jrb.c	/^#define isroot(n) (n->roothead & 1)$/
+job_exec	./src/job_queue.c	/^void *job_exec (void *job_q)$/
+job_queue_init	./src/job_queue.c	/^List *job_queue_init (int pool_size)$/
+job_submit	./src/job_queue.c	/^void job_submit (List * job_q, FuncPtr func, void /
+jrb_delete_node	./src/jrb.c	/^void jrb_delete_node (JRB n)$/
+jrb_empty	./include/jrb.h	/^#define jrb_empty(t) (t->flink == t)$/
+jrb_find_dbl	./src/jrb.c	/^JRB jrb_find_dbl (JRB n, double dkey)$/
+jrb_find_gen	./src/jrb.c	/^JRB jrb_find_gen (JRB n, Jval key, int (*fxn) (Jva/
+jrb_find_gte_dbl	./src/jrb.c	/^JRB jrb_find_gte_dbl (JRB n, double dkey, int *fnd/
+jrb_find_gte_gen	./src/jrb.c	/^JRB jrb_find_gte_gen (JRB n, Jval key, int (*fxn) /
+jrb_find_gte_int	./src/jrb.c	/^JRB jrb_find_gte_int (JRB n, int ikey, int *fnd)$/
+jrb_find_gte_str	./src/jrb.c	/^JRB jrb_find_gte_str (JRB n, char *key, int *fnd)$/
+jrb_find_int	./src/jrb.c	/^JRB jrb_find_int (JRB n, int ikey)$/
+jrb_find_str	./src/jrb.c	/^JRB jrb_find_str (JRB n, char *key)$/
+jrb_first	./include/jrb.h	/^#define jrb_first(n) (n->flink)$/
+jrb_free_tree	./src/jrb.c	/^void jrb_free_tree (JRB n)$/
+jrb_insert_b	./src/jrb.c	/^static JRB jrb_insert_b (JRB n, Jval key, Jval val/
+jrb_insert_dbl	./src/jrb.c	/^JRB jrb_insert_dbl (JRB tree, double dkey, Jval va/
+jrb_insert_gen	./src/jrb.c	/^JRB jrb_insert_gen (JRB tree, Jval key, Jval val, /
+jrb_insert_int	./src/jrb.c	/^JRB jrb_insert_int (JRB tree, int ikey, Jval val)$/
+jrb_insert_str	./src/jrb.c	/^JRB jrb_insert_str (JRB tree, char *key, Jval val)/
+jrb_iprint_tree	./src/jrb.c	/^void jrb_iprint_tree (JRB t, int level)$/
+jrb_last	./include/jrb.h	/^#define jrb_last(n) (n->blink)$/
+jrb_nblack	./src/jrb.c	/^int jrb_nblack (JRB n)$/
+jrb_next	./include/jrb.h	/^#define jrb_next(n) (n->flink)$/
+jrb_nil	./include/jrb.h	/^#define jrb_nil(t) (t)$/
+jrb_plength	./src/jrb.c	/^int jrb_plength (JRB n)$/
+jrb_prev	./include/jrb.h	/^#define jrb_prev(n) (n->blink)$/
+jrb_print_tree	./src/jrb.c	/^void jrb_print_tree (JRB t, int level)$/
+jrb_rtraverse	./include/jrb.h	/^#define jrb_rtraverse(ptr, lst) \\$/
+jrb_traverse	./include/jrb.h	/^#define jrb_traverse(ptr, lst) \\$/
+jrb_val	./src/jrb.c	/^Jval jrb_val (JRB n)$/
+jval_c	./src/jval.c	/^char jval_c (Jval j)$/
+jval_carray	./src/jval.c	/^char *jval_carray (Jval j)$/
+jval_d	./src/jval.c	/^double jval_d (Jval j)$/
+jval_f	./src/jval.c	/^float jval_f (Jval j)$/
+jval_farray	./src/jval.c	/^float *jval_farray (Jval j)$/
+jval_i	./src/jval.c	/^int jval_i (Jval j)$/
+jval_iarray	./src/jval.c	/^int *jval_iarray (Jval j)$/
+jval_l	./src/jval.c	/^long jval_l (Jval j)$/
+jval_s	./src/jval.c	/^char *jval_s (Jval j)$/
+jval_sh	./src/jval.c	/^short jval_sh (Jval j)$/
+jval_uc	./src/jval.c	/^unsigned char jval_uc (Jval j)$/
+jval_ui	./src/jval.c	/^unsigned int jval_ui (Jval j)$/
+jval_ush	./src/jval.c	/^unsigned short jval_ush (Jval j)$/
+jval_v	./src/jval.c	/^void *jval_v (Jval j)$/
+key_add	./src/key.c	/^void key_add (Key * result, const Key * const op1,/
+key_assign	./src/key.c	/^void key_assign (Key * k1, Key k2)$/
+key_assign_ui	./src/key.c	/^void key_assign_ui (Key * k, unsigned long ul)$/
+key_between	./src/key.c	/^int key_between (void *logs, const Key * const tes/
+key_comp	./src/key.c	/^int key_comp (const Key * const k1, const Key * co/
+key_distance	./src/key.c	/^void key_distance (void *logs, Key * diff, const K/
+key_equal	./src/key.c	/^int key_equal (Key k1, Key k2)$/
+key_equal_ui	./src/key.c	/^int key_equal_ui (Key k, unsigned long ul)$/
+key_index	./src/key.c	/^int key_index (void *logs, Key mykey, Key k)$/
+key_init	./src/key.c	/^void key_init ()$/
+key_make_hash	./src/key.c	/^void key_make_hash (Key * hashed, char *s, size_t /
+key_makehash	./src/key.c	/^void key_makehash (void *logs, Key * hashed, char /
+key_midpoint	./src/key.c	/^void key_midpoint (void *logs, Key * mid, Key key)/
+key_print	./src/key.c	/^void key_print (Key k)$/
+key_rand	./test/bigtest.c	/^void key_rand (Key * key)$/
+key_sub	./src/key.c	/^void key_sub (void *logs, Key * result, const Key /
+key_to_str	./src/key.c	/^void key_to_str (Key * k)$/
+kill_hosts	./test/bigtest_ssh.c	/^void kill_hosts (char *nodelist)$/
+leafset_delete	./src/route.c	/^void leafset_delete (ChimeraState * state, Chimera/
+leafset_insert	./src/route.c	/^void leafset_insert (ChimeraState * state, Chimera/
+leafset_print	./src/route.c	/^void leafset_print (ChimeraState * state)$/
+leafset_range_update	./src/route.c	/^void leafset_range_update (RouteGlobal * routeglob/
+leafset_size	./src/route.c	/^int leafset_size (ChimeraHost ** arr)$/
+leafset_update	./src/route.c	/^void leafset_update (ChimeraState * state, Chimera/
+list_empty	./src/job_queue.c	/^int list_empty (List * l)$/
+list_get	./src/job_queue.c	/^node *list_get (List * l)$/
+list_init	./src/job_queue.c	/^List *list_init ()$/
+list_insert	./src/job_queue.c	/^void list_insert (List * l, node * new)$/
+list_make_node	./src/job_queue.c	/^node *list_make_node (FuncPtr func, void *args, in/
+load_destinations	./test/bignode.c	/^void load_destinations ()$/
+log_direct	./src/log.c	/^void log_direct (void *logs, int type, FILE * fp)$/
+log_init	./src/log.c	/^void *log_init ()$/
+log_message	./src/log.c	/^void log_message (void *logs, int type, char *form/
+lprev	./src/jrb.c	/^JRB lprev (JRB n)$/
+make_jrb	./src/jrb.c	/^JRB make_jrb ()$/
+message_create	./src/message.c	/^Message *message_create (Key dest, int type, int s/
+message_free	./src/message.c	/^void message_free (Message * msg)$/
+message_handler	./src/message.c	/^void message_handler (void *chstate, int type, mes/
+message_init	./src/message.c	/^void *message_init (void *chstate, int port)$/
+message_received	./src/message.c	/^void message_received (void *chstate, char *data, /
+message_receiver	./src/message.c	/^void message_receiver (void *chstate, Message * me/
+message_send	./src/message.c	/^int message_send (void *chstate, ChimeraHost * hos/
+mk_new_ext	./src/jrb.c	/^#define mk_new_ext(new, kkkey, vvval) {\\$/
+mk_new_int	./src/jrb.c	/^static void mk_new_int (JRB l, JRB r, JRB p, int i/
+network_activate	./src/network.c	/^void *network_activate (void *state)$/
+network_address	./src/network.c	/^unsigned long network_address (void *networkglobal/
+network_churn	./test/monitor.c	/^void *network_churn ()$/
+network_init	./src/network.c	/^void *network_init (void *logs, int port)$/
+network_resend	./src/network.c	/^int network_resend (void *state, ChimeraHost *host/
+network_send	./src/network.c	/^int network_send (void *state, ChimeraHost * host,/
+new_dllist	./src/dllist.c	/^Dllist new_dllist ()$/
+new_jval_c	./src/jval.c	/^Jval new_jval_c (char c)$/
+new_jval_carray_nnt	./src/jval.c	/^Jval new_jval_carray_nnt (char *carray)$/
+new_jval_carray_nt	./src/jval.c	/^Jval new_jval_carray_nt (char *carray)$/
+new_jval_d	./src/jval.c	/^Jval new_jval_d (double d)$/
+new_jval_f	./src/jval.c	/^Jval new_jval_f (float f)$/
+new_jval_farray	./src/jval.c	/^Jval new_jval_farray (float f0, float f1)$/
+new_jval_i	./src/jval.c	/^Jval new_jval_i (int i)$/
+new_jval_iarray	./src/jval.c	/^Jval new_jval_iarray (int i0, int i1)$/
+new_jval_l	./src/jval.c	/^Jval new_jval_l (long l)$/
+new_jval_s	./src/jval.c	/^Jval new_jval_s (char *s)$/
+new_jval_sh	./src/jval.c	/^Jval new_jval_sh (short sh)$/
+new_jval_uc	./src/jval.c	/^Jval new_jval_uc (unsigned char uc)$/
+new_jval_ui	./src/jval.c	/^Jval new_jval_ui (unsigned int i)$/
+new_jval_ush	./src/jval.c	/^Jval new_jval_ush (unsigned short ush)$/
+new_jval_v	./src/jval.c	/^Jval new_jval_v (void *v)$/
+node	./include/job_queue.h	/^} node;$/
+node_create	./src/priqueue.c	/^node node_create(unsigned int id,$/
+node_find	./src/priqueue.c	/^int node_find(binary_heap a,unsigned int id) {$/
+node_ptr	./include/priqueue.h	/^typedef node * node_ptr;$/
+power	./src/route.c	/^int power (int base, int n)$/
+printTable	./src/route.c	/^void printTable (ChimeraState * state)$/
+print_error	./src/priqueue.c	/^void print_error(char *msg) { printf("# ERROR: %s/
+print_tree	./test/monitor.c	/^void print_tree (JRB t)$/
+priority	./include/priqueue.h	/^typedef unsigned long long priority;$/
+read_from_file	./test/dhttest.c	/^bool read_from_file(FILE *fp, char *block)$/
+read_hosts	./test/bigtest.c	/^JRB read_hosts (char *fn, int *nhosts)$/
+recolor	./src/jrb.c	/^static void recolor (JRB n)$/
+redirect_to_chimera	./test/dhttest.c	/^void redirect_to_chimera(ChimeraState * chstate, M/
+retransmit_packets	./src/network.c	/^void *retransmit_packets(void *state)$/
+route_get_table	./src/route.c	/^ChimeraHost **route_get_table (ChimeraState * stat/
+route_init	./src/route.c	/^void *route_init (ChimeraHost * me)$/
+route_keyupdate	./src/route.c	/^void route_keyupdate (void *routeglob, ChimeraHost/
+route_lookup	./src/route.c	/^ChimeraHost **route_lookup (ChimeraState * state, /
+route_neighbors	./src/route.c	/^ChimeraHost **route_neighbors (ChimeraState * stat/
+route_row_lookup	./src/route.c	/^ChimeraHost **route_row_lookup (ChimeraState * sta/
+route_update	./src/route.c	/^void route_update (ChimeraState * state, ChimeraHo/
+rprev	./src/jrb.c	/^JRB rprev (JRB n)$/
+sema_create	./src/semaphore.c	/^void *sema_create (int val)$/
+sema_destroy	./src/semaphore.c	/^void sema_destroy (void *v)$/
+sema_p	./src/semaphore.c	/^int sema_p (void *v, double time)$/
+sema_v	./src/semaphore.c	/^void sema_v (void *v)$/
+setblack	./src/jrb.c	/^#define setblack(n) n->red = 0$/
+setext	./src/jrb.c	/^#define setext(n) n->internal = 0$/
+sethead	./src/jrb.c	/^#define sethead(n) (n->roothead |= 2)$/
+setint	./src/jrb.c	/^#define setint(n) n->internal = 1$/
+setleft	./src/jrb.c	/^#define setleft(n) n->left = 1$/
+setlext	./src/jrb.c	/^#define setlext(node, val) node->key.v = (void *) /
+setnormal	./src/jrb.c	/^#define setnormal(n) n->roothead = 0$/
+setred	./src/jrb.c	/^#define setred(n) n->red = 1$/
+setrext	./src/jrb.c	/^#define setrext(node, value) node->val.v = (void */
+setright	./src/jrb.c	/^#define setright(n) n->left = 0$/
+setroot	./src/jrb.c	/^#define setroot(n) (n->roothead |= 1)$/
+sha1_keygen	./src/key.c	/^char *sha1_keygen (char *key, size_t digest_size, /
+sha1_keygen1	./test/sha1_keygen.c	/^char *sha1_keygen1 (char *key, char *digest, int s/
+sha1_keygen2	./test/bignode.c	/^char *sha1_keygen2 (char *key, char *digest)$/
+sibling	./src/jrb.c	/^#define sibling(n) ((isleft(n)) ? n->parent->blink/
+single_rotate	./src/jrb.c	/^static void single_rotate (JRB y, int l)$/
+sort_hosts	./src/route.c	/^void sort_hosts (void *logs, ChimeraHost ** hosts,/
+sort_hosts_key	./src/route.c	/^void sort_hosts_key (void *logs, ChimeraHost ** ho/
+start_host	./test/bigtest.c	/^void start_host (Host * host, Host * join)$/
+str_to_key	./src/key.c	/^void str_to_key (char *strOrig, Key * k)$/
+test_del	./test/bighost.c	/^void test_del (Key * k, Message * m)$/
+test_fwd	./test/bighost.c	/^void test_fwd (Key ** kp, Message ** mp, ChimeraHo/
+test_init	./test/bighost.c	/^void test_init (ChimeraState * state, Message * m)/
+test_print	./test/job_test.c	/^void test_print (void *in)$/
+test_update	./test/receiver.c	/^void test_update (Key * k, ChimeraHost * h, int jo/
+tvtod	./src/dtime.c	/^double tvtod (struct timeval tv)$/
+void	./include/job_queue.h	/^typedef void (*FuncPtr) (void *, void *);$/
+xstrdump	./test/test.c	/^ xstrdump(Key *pkey, int size)$/

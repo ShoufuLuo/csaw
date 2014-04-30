@@ -1,0 +1,3 @@
+interfaces	iChimeraRider.xpt
+binary-component	libchimerard.dylib
+category	profile-after-change ChimeraRider @ucsb.com/XPCOM/ChimeraRider;1

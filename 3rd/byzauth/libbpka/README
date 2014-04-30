@@ -1,0 +1,101 @@
+
+
+
+Byzantine Fault Tolerant Public Key Authentication API 
+------------------------------------------------------
+
+This library provides an implementation of byzantine 
+fault tolerant authentication protocol. It is 
+available as a C++ language library.  All the user exposed 
+functionalities of the library are available through the 
+an object of ByzantineAuthenticationAdapter class. 
+
+See  
+http://byzauth.svn.sourceforge.net/viewvc/byzauth/trunk/byzauth/libbpka/byzantineauthenticationadapter.h
+
+
+
+The object can not be created directly on the stack because
+of having a protected constructor.  The reason for this 
+decision is apparently how the software evolved (TODO: this 
+may be candidate for refactoring, albeit low priority) 
+
+
+
+A byzauth object is created through the following call: 
+   static ByzantineAuthenticationAdapter::ByzantineAuthenticationAdapter* New 
+      (std::string cfg,
+       int tgs,
+       epoch_t expiry_interval,
+       unsigned nmesg_payload,
+       bool lazy = true); 
+
+
+
+The user should delete the byzantine fault tolerant authentication 
+adapter object at end of the program.  
+   static void  Delete(ByzantineAuthenticationAdapter *);
+
+
+
+
+The library does not require use of system time to 
+get time.  The idea is to allow the logs to be sucessfully 
+debugged in terms of the logical time.  The application may 
+choose to provide a call back to library for gathering 
+localtime by implementing the following virtual 
+function 
+   virtual void  LocalTime (epoch_t t) ;
+Notice this function is also useful for running simulations. 
+
+
+The library works in an overlay mode.  If the application 
+recieves the message from a peer, then the message should 
+be passed to the authentication library using the 
+following call: 
+   virtual bool Recv(const peerid_t& peer, const std::string & mesg);
+
+When the application is about to send an application message, 
+the authentication library can be informed about this fact, 
+The library will then compile the protocol messages into
+the "message" and return to the application for actually sending 
+it out.  (Note the message sent must be extarcted and provided
+back into the authentication library back at the receiving peer).  
+This send can have two forms, one going to a sigle peer, and 
+another to many: 
+   virtual bool Send (const peerid_t& peer, std::string & mesg) ;
+ 	virtual bool SendMulti(const std::vector<peerid_t>& peers, std::string & mesg, bool overload = false) ; 
+Notice when overload is true, an unlimited number of messages 
+can be overlayed on top of outgoing messages.  Also, depending on 
+the creating arguments, one of these methods may be unsupported, and 
+hence throw an exception. 
+
+
+The authentication engine keeps a local cache of pending authentication
+protocol messages that must be sent out when feasible.  This information
+needs to be loaded into the memory on start and that the 
+state is saved on file at the close of operations.  These two functions
+start and stop the authentication engine on a peer: 
+   virtual bool Init (int keybits, const peerid_t& self, const std::vector<peerid_t>& bootstrap, std::string filename, epoch_t curr_time);
+   virtual bool Init (std::string filename, epoch_t curr_time);
+   virtual bool DeInit ();
+Notice that the second form of init just reads the adapter initialization
+arguments directly from the config file.  The first form of init
+saves the information in the filename given as the fourth argument.  
+
+
+The application can override the trusted status of peers by using 
+the following functions: 
+   void SetTrusted (const peerid_t& pid);
+   void SetUntrusted (const peerid_t& pid);
+   void SetProbationary (const peerid_t& pid);
+
+The authentication engine provides the following functions to get 
+the authenticated public key of peers
+   bool GetAuthenticatedKey (const peerid_t& pid, std::string& pubkey, int & trust_value, bool & unknown);
+   bool GetAuthenticators (const peerid_t& pid, group_t & authenticators); 
+
+
+
+
+

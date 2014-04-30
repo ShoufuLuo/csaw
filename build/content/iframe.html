@@ -1,0 +1,73 @@
+
+<html>
+<head>
+<title> Facebook | Shoufu Luo </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<script type="text/javascript" src="jquery-1.7.1.js"></script>
+<script type="text/javascript">
+      function call_parent() {
+	window.parent.hello_iframe();
+      }
+      
+      function fb_login() {
+	 var appID = "232949870104101";
+         alert("lgoin with " + appID);
+	 
+	 var path = 'https://www.facebook.com/dialog/oauth?';
+	 var queryParams = ['client_id=' + appID,
+	    'redirect_uri=' + window.location,
+	    'response_type=token'];
+	 var query = queryParams.join('&');
+	 var url = path + query;
+	 window.open(url, "facebook_login");	 
+      }
+       if (window.location.hash.length == 0) {
+      $(document).ready(function () {
+	    call_parent();
+	    fb_login();
+	    $('a').click(function () {
+	       	alert("hello, jquery");
+	    });
+	});
+       }
+	
+</script>
+</head>
+<body>
+   
+<a href="">link</a>
+
+   <script type="text/javascript">
+   
+	function showBody() {
+	
+		var accessToken = window.location.hash.substring(1);
+		
+	
+		parent.show_token(accessToken);
+		
+		// use jsonp to call the graph
+		//var path = "https://graph.facebook.com/me?";
+		//var queryParams = [accessToken, 'callback=displayUser'];
+		//var query = queryParams.join('&');
+		//var url = path + query;
+		//var script = document.createElement('script');
+		//script.src = url;
+		//document.body.appendChild(script);
+		
+		//alert(accessToken);
+		//parent.showAccessToken(accessToken);
+	}
+	
+	if (window.location.hash.length > 0) {
+	$(document).ready(function() {
+		showBody();
+	});
+	}
+
+
+</script>
+
+
+</body>
+</html>

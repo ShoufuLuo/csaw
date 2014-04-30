@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://pinocchio/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://pinocchio/locale/overlay.dtd">
+<overlay id="pinocchio-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="application/javascript" src="overlay.js"/>
+   <script type="application/x-javascript" src="chrome://pinocchio/content/byzauth/bft-address-parser.js"/>
+   <script type="application/x-javascript" src="chrome://pinocchio/content/byzauth/bft-auth-overlay.js"/>
+   <script type="application/x-javascript">
+   <![CDATA[
+		window.addEventListener("load", P2PInit(), false);
+     ]]>
+
+   </script> 
+
+<menupopup id="menu_ToolsPopup">
+	<menuitem id="pinocchio-hello" label="&hellopino;" oncommand="pinocchio.start(event);"/>
+	
+<!-- test for byzauth -->
+      <menuseparator/>
+      <menu id="bft-auth-popup-root" label = "Sender Authentication">
+         <menupopup id="bft-auth-popup">
+            <menuitem id="bft-auth-showmesgstatus" label="Message Authentication Status"  
+			oncommand = "BftAuth_show_mesgstatus();" accesskey="m" disabled="true" />
+            <menuitem id="bft-auth-contacts" label="Show Trusted Peers"  accesskey="p" 
+			oncommand = "BftAuth_show_contacts();" />
+            <menuitem id="bft-auth-settings" label="Sender Authentication Settings" accesskey="s" 
+			oncommand="BftAuth_Settings();"/>
+            <menuitem id="bft-auth-genkey" label="Clear Authentication State" accesskey="c" 
+			oncommand = "BftAuth_clear();" />
+            <menuitem id="bft-auth-about" label="About" accesskey="a" 
+			oncommand = "BftAuth_about();" />
+         </menupopup>
+      </menu>
+</menupopup>
+ <popup id="threadPaneContext" >
+  	<menuseparator/>
+  	<menuitem id="bft-auth-showmesgstatus-frompopup" label="Message Authentication Status"  
+			oncommand = "BftAuth_show_mesgstatus_frompopup(event);"/>
+ </popup> 
+   
+
+<!-- Firefox -->
+<toolbarpalette id="BrowserToolbarPalette">
+  <toolbarbutton id="pino-head"/>
+  </toolbarpalette>
+
+
+<!-- button details -->
+<toolbarbutton id="pino-head"
+  label="Pinocchio"
+  type="panel"
+  tooltiptext="Pinocchio: Creditable and Social-Annotated Web"
+  class="toolbarbutton-1 chromeclass-toolbar-additional custombutton">
+      <panel id="comment-panel" type="arrow" noautohide="true" position="after_start" style="max-height:500px;max-width:500px;">
+	<!--<grid>
+		<columns>
+		  <column sytle="width: 60px"/>
+		  <column width="30px"/>
+		  <column flex="1"/>
+		</columns>
+	      
+		<rows>
+			<row>
+				<image src="chrome://pinocchio/skin/icon.png" style="width:48px height:48px"/>
+				
+			</row>
+			<separator orient="horizontal" class="groove"/>
+			<vbox id="comment-list" style="max-height:400;max-width:500;overflow:auto">
+				
+			</vbox>
+			
+			<row>
+				<hbox id="rev-inst">
+					<image src="https://graph.facebook.com/luoshoufu/picture" style="width:48px height:48px"/>
+					<spacer width="30px"/>
+					<textbox id="cmmt-box" style="width: 320px" spellcheck="true" multiline="true" overflow="false" cols="30" 
+						onkeydown="if (event.keyCode == 13) pinocchio.getInput()" />
+				</hbox>
+			</row>
+		</rows>
+	      
+	</grid>-->
+	
+	
+		
+	<vbox>
+		<hbox>
+	<!--		<image src="chrome://pinocchio/skin/icon_small.png" style="width:48px height:48px"/> -->
+			
+			<description>Welcome to Pinocchio world!</description>
+			<spacer width="270px"/>
+			<description align="right"  onclick="hidePopup();">Close</description>
+			<spacer flex="1" height="10px"/>
+		</hbox>
+		
+		<separator orient="horizontal" class="groove"/>
+		
+		<vbox flex="1" style="height:800px;width:400px;overflow:auto;">
+			<spacer height="20px"/>
+			<vbox id="comment-list" style="height: 10px"/>
+			<spacer height="20px"/>
+		</vbox>
+		
+		<separator orient="horizontal" class="groove"/>
+		<spacer height="10px"/>
+		
+		<hbox id="rev-inst">
+			<image src="https://graph.facebook.com/luoshoufu/picture" style="width:48px height:45px"/>
+			<spacer width="10px"/>
+			<vbox>
+			<textbox id="cmmt-box" style="width: 330px" emptytext="what's your opinion?" multiline="true" rows="2" cols="30" 
+				 onkeydown="if (event.keyCode == 13) pinocchio.getInput()" />
+			<!---<label id="cmmt-hint"/> -->
+			</vbox>
+		</hbox>
+	 </vbox>
+	 
+      </panel>
+</toolbarbutton>
+
+</overlay>
+
+
+
+
+

@@ -1,0 +1,1 @@
+OBJS = /builds/slave/rel-m-rel-xr-osx64-bld/build/obj-firefox/x86_64/modules/libreg/src/reg.o /builds/slave/rel-m-rel-xr-osx64-bld/build/obj-firefox/x86_64/modules/libreg/src/VerReg.o /builds/slave/rel-m-rel-xr-osx64-bld/build/obj-firefox/x86_64/modules/libreg/src/vr_stubs.o /builds/slave/rel-m-rel-xr-osx64-bld/build/obj-firefox/x86_64/modules/libreg/src/nr_bufio.o

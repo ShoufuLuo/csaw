@@ -1,0 +1,13 @@
+
+content	pinocchio	content/
+
+locale	pinocchio	en-US	locale/en-US/
+
+skin	pinocchio	classic/1.0	skin/ 
+style	chrome://global/content/customizeToolbar.xul	chrome://pinocchio/skin/overlay.css
+
+overlay	chrome://browser/content/browser.xul	chrome://pinocchio/content/csaw-overlay.xul
+overlay	chrome://browser/content/browser.xul	chrome://pinocchio/content/pino-overlay.xul
+
+manifest components/components.manifest
+

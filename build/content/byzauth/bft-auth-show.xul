@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+
+<dialog
+   id="bft-auth-show-dialog"
+   title="Sender Authentication Trust Status"
+   width = "1000" 
+   height = "600"
+   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   buttons = "accept" 
+   ondialogaccept="return doBftShowOK();" 
+   onload="setBftShowView();">
+
+   <script type="application/x-javascript" src="chrome://pinocchio/content/byzauth/bft-auth-show.js"/>
+   
+ 	<popupset>
+		<popup id="trustchangemenu">
+    		<menuitem label="Trust" oncommand="OnMakeTrusted();"/>
+         <menuitem label="Reauthenticate" oncommand="OnReAuthenticate();"/>
+    		<menuitem label="Do Not Trust" oncommand="OnMakeUntrusted();"/>
+  		</popup>
+	</popupset>
+
+   <dialogheader title="Trusted Peers" description=""/>
+   <tree id="bft-auth-trusted-tree" context="trustchangemenu" flex="1">
+      <treecols>
+         <treecol id="peer" label="Peer" flex="4"/>
+         <treecol id="pubkey" label="Public Key" flex="6"/>
+         <treecol id="trustvalue" label="Trust Value" flex="1"/>
+         <treecol id="authenticators" label="Authenticators" flex="6"/> 
+      </treecols>
+      <treechildren/>
+   </tree>
+</dialog>

@@ -1,0 +1,554 @@
+3/20 
+
+made changes for both eager and lazy to work correctly wuth the 
+same interface 
+
+
+note that however peer 8 and 9 from the test make trace still do 
+not converge to 100% complete.  both are waiting for each other
+check if it is a bug or race condition 
+
+
+3/18
+
+trying to debug the assertion with the assumption
+that c vs r is mismatched  
+
+todo later.  for now just compile with the flag 
+to escape the problem and generate the graphs needed
+for the new paper submission 
+
+3/17
+
+Check version 208 initialization of cache record
+to expiry 0. is it true that 0 expiry and local 
+times are being carried around? 
+
+does it need some kind of assertion? 
+
+Meanwhile the valgrind effort led to small change 
+in init of vars but crash at signature failed 
+remains 
+
+
+
+3/7/2008 
+
+Some bug is causing the challenge response to fail even 
+when number of malicious peers is 0. 
+
+
+3/3/2008 
+
+New changes are making it compile it with cygwin.  The observation 
+is that k invalid key is found.  It works as shown in test/README 
+
+eg: 
+./synthetic_trace.py 16 10000 > ./trace.txt
+../../tools/mail_trace_scripts/bootstrapping.py trace.txt 8 random > bs.txt
+./testprotocol3 bs.txt trace.txt 8 1000000 100 30
+
+
+
+
+
+8/14
+after changes of copy constructor in logging.h, the new 
+config file format works. 
+
+runs with a small sample. can check valgrind now 
+
+
+
+8/13 TODO: 
+Looks like its easier(?) to do the logfile config option first. The later 
+options like keylength etc can be figured out later 
+
+
+
+11/30 
+Done improving log 
+Added expiry data to messages and a causal id that follows around messages
+caused by the same same thing 
+
+TODO 
+set expiry time based on discussion below - through configurable 
+respect expiry time 
+match expiry time with non live time 
+
+
+11/22
+Keep a timeout on each message
+
+What should be the appropriate timeout - does it depend on anything. 
+   eg: on when the authenticating peer itself will abandon any auth attempt 
+   then its peers must also do the same since no point carrying additonal
+   no use messages. this timing is enforced through expiry date on each 
+   messgae
+
+
+One thing to consider is if different messages need different kinds of 
+expiry time. eg: one that benefits a peer i.e. an authentication that 
+needs to be done, then the peer benefitting from the authentication wants to
+keep a longer life on the message.  But this situation is reversed 
+for the authenticator who wants a shortest possible life for the message
+since its not benefitting in any way.  
+
+Not exactly:  Let peer A want to authenticate B using peers P_i 
+A does not want to wait forever for any P_i : then it must put an 
+expiry equal to the time it would wait for P_i on every authentication 
+request message.  
+
+Proceeding recursively, if the authentication request itself 
+expires in time T, then so should all the other messages caused by it: eg: 
+challenge, response, and vote.  They should all expire in the same time 
+period.  Note that loose clock synchronization is expected to help 
+control the cache size on peers.  If not synchronized - not a major problem, 
+peers with clocks behind the "global time" will carry more messages in their 
+cache (which they could have deleted). 
+
+i.e. 
+1. Each message should have expiry date.  
+2. Expiry date should be inherited in causally related messages
+3. Pre protocol messages: i.e. admission request and public key request 
+   a. first can be vitual - i.e. produced by the protocol interface layer causing
+      no cache overhead. however, in general it should have some global expiry time T
+   b. second can be eliminated
+
+In conclusion: 
+Both of a and b could do with global expiry time E_g, while A could select a time 
+interval E_a which is say x*E_g. Can study what happens for various values of x
+
+
+TODO: 
+Validate protocol is exactly correct after any recent changes. 
+   Mostly works - some peers arent authenticated completely, on others
+   everyone got authenticated.  Also some are migrating? Why is that 
+   a setting issue? 
+
+Change test program 
+   Dont take tg as input
+   Generate tg candidates and then run expiry stuff as defined above 
+   Run for various values of x and find out which works. 
+
+
+
+
+
+
+
+
+11/12 
+It makes sense to carry the messages for trusted peers because
+we already know they are genuine.  So the first question below is answered 
+yes. 
+
+It does improve if we keep all the messages.  Yes it does; but we
+should be able to keep it in cold storage.  Transfer only the messages
+of trusted peers and when there is available bandwidth, add on the slow
+messages. This answers 2 and 3. 
+
+
+Where should cache in and cache out be?  They are currently embedded 
+in the message cache code.  An alternative way would be to move them 
+out as an api of the message cache.  Moving out option has the following
+effects: 
+   + (?) neater and reliable loading and unloading of message cache  
+      but - cant we make it object oriented and achieve the same end? 
+      yes
+   -  exposing the cacheing functionality to unrelated class. 
+      note that derived class exposure would have been fine. 
+This answers question 4 below. 
+
+
+Suppose we can carry a total of n outgoing messages per outgoing
+event and can store N messages total.  Suppose the peer group size
+is m.  A trusted peer is overconsuming if its messages are more than n/m. 
+It should then become a candidate for not being in the trust groups.  
+In any case we keep its mesages in cold storage as indicated in point 2 
+above. 
+
+So WHATS the design implication 
+derive DiskMessageCache from MessageCache 
+insert virtual functions to load and unload in MessageCache 
+Cache Load and Unload done through a private object of MessageCache 
+
+
+
+
+11/10 
+Cache in and cache out work well. Right now we are trimming out
+messages of non trust group peers. 
+Ideas & Questions: 
+1 Is this the right way? 
+2 Does it improve if we keep all messgaes. 
+3 How to limit size of message and yet keep a larger cache
+4. Can we make CacheIn and CacheOut explicit
+5. Also if a peer is slow and causing too many messages in cache can we
+   mark it slow and delete its messages. 
+All the mechanisms are in place - now only need to check the right 
+heuristic for running best 
+
+
+10/26
+Add cache out for message cache.  it seems to be too much 
+memory consumption to keep holding large message caches in 
+memory 
+
+
+9/13 
+so we got the message cache working as expected 
+except that it gets clogged with too many messages. 
+one way to cut down on useless load is to mark 
+outgoing messages with do not cache flag. eg: 
+if A -> B, C, D, E and the envelope has messages 
+for B,C,D,E and F.  Then only the message for F 
+needs to be stored and forwarded.  Every sender 
+knows which peers it is sending to.  It can mark 
+all protocol messages to all the targets as do not cache. 
+Does this help 
+
+It seems we lose because of not taking advantage of
+knowledge about co receivers.  This is additional 
+synchronization point if we assume messages are 
+received in common case. 
+
+Have to reason what happens when a message is lost
+
+
+
+
+
+
+9/6 
+message cache has a timestamp issue.  the thinking does not 
+seem to be clear i.e. should we be taking time stamp from message or 
+envelope - adding the files for possible back track - currently the 
+protocol works but the cache does not get fixed
+
+
+9/6
+Note that version 40 works on new england trace
+
+7/22
+Some problem with real trace.  The peer is jlonerga%bu.edu@mail.dpc.umassp.edu
+Problem occurs at Self::_authenticate_peers (this=0x6a2ac0) at self.cpp:1064
+as a segfault on string assignment.  
+
+
+
+7/14 
+Now at able to authenticate all peers from bootstrapping.  Note that this makes the
+bootstrapping group function more like a permanent trusted group whereas the trusted
+group may be more volatile.  Is there a need to change this behaviro? 
+
+What next? 
+Check authentication on multigroup (eg: real trace) data and see that trusted groups
+change correctly. (TODO)
+
+NOTE - testprotocol2.cpp is a good simulation if we intend to support encrypted messaged - 
+for signed only the receiver needs sender key. check if the system behaves identical on 
+both these cases (TODO) 
+
+
+
+7/12 
+Added bootstrap to waiters always - how to optimize this.  Also cneeds check from protocol.log that 
+the quick vote path leads to peers getting authenticated 
+
+
+
+7/11
+Try to understand why protocol doesnt complete.  For example 
+Why end-point-1 is still a probationary of peer ep0 
+
+Q1 : Did ep1 send an admission request to ep0? 
+Yes
+Note: Public key requet messages are being sent properly i.e. to all bootstrap peers
+Note: Admission requests are sent to all the peers correctly. 
+
+
+Q2 Did ep0 send authentication request to all the peers? 
+Yes
+
+Q3 Did ep1 receive challenge from all peers?
+Yes
+
+
+Q4: Did all peers receive response from ep1? 
+Yes
+
+
+
+Q5 Did all peers send the votes to ep0? 
+No. Only 1 and 3 received any votes about 1
+Workaround - we put all bootstrapping peers in the waiters set.  Somehow the waiter set
+size was not correct.
+
+
+
+
+
+
+7/10 
+trying to print proof repository may help ? Tried and fixed problems with
+the waiterset.  Still needs to be done -  trace a peer who remains probationary 
+and see which message is missing - that could have made it trusted ... ? 
+
+No difference even if 1 run is done.  earlier it was 2 runs .... 
+
+
+
+7/7
+Weird = tried to run the message loop twice and yet the probationary
+peers are around for 1,2 and 4,5 but are gone for 3 - why ? 
+
+
+
+7/6 
+Entire protocol runs smoothly till end of authentication in honest
+environment.  
+Why is probationary peers still around in some xml files ? 
+
+
+
+7/3 
+After these fixes we go a long way until a vote is received from a bootstrap
+peer whose public key is unknown. Solution is to separate out the 
+authentication as a standalone function and call it on any vote recv and 
+key recv from bootstrap peers.  Need to check that this fixes and it never 
+reaches byzantine phase. 
+
+
+
+
+7/2
+Rejected unsigned messages and handled properly expired keys on recive.
+Added Assert signed on send
+Added Assert in < modulus on encrypt/decrypt
+
+
+
+7/1                                
+Cause of problem in unverifiable sign was that message digest was larger than 
+the modulus of encryption 
+
+
+
+6/29
+Does not reach authentication vote at all - clearly the message is sent but is getting lost .... 
+
+
+
+6/29 
+Identified problem caused by delete of encryption object due to mesg delete and then being 
+stored as pointer in key repository. valgrind runs clean now - except for some mem leaks - todo 
+
+
+
+6/25
+
+Find that the deque inside a public key is corrupted.  established this by keeping a small code 
+to write out keys on keyrepository::add - this causes crash before exit. 
+
+Clearly the key is either corrupt on create or on transit.  chekc this by similar approach....
+
+
+
+
+
+
+
+
+
+
+6/13 
+
+Still crash in serialize of public ket encryption  - now its segv. 
+
+6/10 
+I have put in the if 0 inside the self.cpp file to keep the public key propogation simple. After this 
+was done, the public keys were received by peers. 
+
+Now the program throws exception because possibly the base class objects are not exported.  Some changes have 
+been done in rsa.h , publickeyencryption.h , privatekeyencryption.h.  
+
+Need to verify from the boost serialization home page and try to remove the crash.   Then verify message flow and 
+check the protocol runs to its end. 
+
+
+
+
+
+5/12
+
+Keep track of message sent to and froms.  Instrument the program so that we can reak on message received by the given peer
+
+
+5/1/06 
+
+why return value is being junked across the adapter??? 
+
+1. change dir of xml files
+2. doesmnt hit break point3 if 2 is disabled
+1   breakpoint     keep y   0x00000000004074e5 in main at testprotocol.cpp:122
+2   breakpoint     keep y   0x0000000000455ab0 in Self::admission_request(Message*) at self.cpp:256
+3   breakpoint     keep n   0x0000000000453488 in Self::public_key_request(Message*) at self.cpp:228
+
+
+4/23/06 
+New Englang trace runs to end without crashing 
+
+1. Change directory of xml files to make the test execution more easy 
+2. Improve logging to understand who sent message to whom and when 
+   Does it help to see badri's program based on xfig? 
+3. find larger trace to really test on large system
+
+
+
+
+
+
+4/20/6
+On receipt of message the class is not fully deserialized to correct 
+derived class.  Can be seen at breakpoint  testprotocol.cpp:163
+Check if everything is being done properly as asked in 
+http://www.boost.org/libs/serialization/doc/serialization.html#derivedpointers
+-- fixed by using Message * as object to be serialized instead of Message & in 
+proxypeer.cpp 
+-- also bug fix for empty queue problem
+
+
+
+
+4/4/6
+Logging (use common library -- not found)
+done. written a small file with plan for future.
+
+Test program
+
+Paper Rough Outline -- Done
+Need to contact don smith to get rutgers email trace
+
+
+
+
+4/2 
+Base class needs to be part of digest eg: admission request (Will do through serialize) 
+   Done in one shot by using serialzie
+
+Logging (use common library -- not found)
+
+
+Test program
+
+Paper Rough Outline
+
+
+
+
+
+
+4/1
+Base class needs to be part of digest eg: admission request 
+Which object keeps track of all objects that are needed for running
+one instance of the authentication system (basically for test program)  OK 
+
+Paper:
+Rough Outline
+
+Implementation:
+Test program
+---Can we make peerfactory work without 
+being static?  Can we have a common 
+byzauth object that glues the components
+for one live peer togetejr ?  OK, OK 
+
+<-Logging (use common library) 
+<-Message transfer pocessor? How to  OK
+
+
+
+
+
+
+
+
+3/ 28 (2) 
+TODO - Base class needs to be part of digest eg: admission request
+Vote message has to be done
+Need to have data structure to do the computation at /////////////
+
+
+
+
+
+
+3/28
+
+This is getting real tight now - because we are close to the glue stage
+where everything gets together
+
+Methods like  Self::AdmissionRequest() should become
+1.  Self.AdmissionRequest(AdmissionRequest) or
+2.  Self.AdmissionRequest(sender, Message * ) --- looks better -- done 
+
+
+
+
+
+
+
+3/22
+Added the digest class in digest.h and tried to compile and run with old style marshal 
+and unmarshal code.  Note that this code couples marshalling with signatrue.  One idea
+is to have a special signature verification and signature creation function.  Note that 
+signer has to be changed - and should sign only the outer level message while preserving
+inner signatures. ---- done 3/22
+
+Again - need on demand signature and verification.  Decouple marshalling functionality
+- maybe put in message base class ?? --- done 3/22
+
+
+
+
+
+????? how to keep track of signature within the message - if this was possible it could
+be easy to verify proof correctness on demand (by third parties) as envisioned by 
+the paper. ????  --- doing 3/22 
+
+the current technology of coupling it with send makes it useless for that purpose 
+
+
+Options: 
+1. keep the entire raw string 
+2. keep the abstraction signed message - and use it to check correctness 
+
+
+Investigate the memento and visitor patterns from design patterns book.  if this item 
+can be resolved then the only task todo is to port the old peer.cpp 
+
+-- chose a memento style Digest. 
+
+
+
+
+NEXT STEPS: 
+transport the peer.cpp implementation code here and get a full test.  also need to write 
+paper beware !
+
+
+
+// March 5, 2006
+// implemented! and tested!
+convert sender and receiver into marshalling objects
+finally keep a send receive plugin that can be called
+as
+
+
+mi.send( mesg_marshal(m), m.to ) ; 
+
+and receive as 
+
+std::string mesg_type, mesg_from; 
+Message * mp = mesg_unmarshal( mi.receive(mesg_from), mesg_type) ; 

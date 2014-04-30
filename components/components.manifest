@@ -1,0 +1,22 @@
+interfaces	ihelloxpcom.xpt
+binary-component	libhxpdemo.dylib
+category	profile-after-change helloxpcom @pinocchio.com/XPCOM/Demo;1
+ 
+interfaces iOSN.xpt
+component {D535D85D-D063-44B4-81F3-B521697408CD} facebook.js
+contract		@pinocchio.com/OSNAPI/Facebook;1 {D535D85D-D063-44B4-81F3-B521697408CD}
+category		profile-after-change	FBAPI	@pinocchio.com/OSNAPI/Facebook;1
+ 
+interfaces	iOSN.xpt
+component		{3E1B79A5-9641-4D54-8CDF-486C5A32499A} twitter.js
+contract		@pinocchio.com/OSNAPI/Twitter;1 {3E1B79A5-9641-4D54-8CDF-486C5A32499A} 
+category		profile-after-change	TWTAPI	@pinocchio.com/OSNAPI/Twitter;1
+ 
+interfaces		IByzauthAdapter.xpt 
+binary-component 	libbyzauth.dylib 
+category		profile-after-change	ByzantineAuthentication	@rutgers.edu/XPCOM/ByzauthAdapter;1
+ 
+interfaces	iChimeraRider.xpt
+binary-component	libchimerard.dylib
+category	profile-after-change ChimeraRider @ucsb.com/XPCOM/ChimeraRider;1
+ 

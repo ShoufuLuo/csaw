@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://pinocchio/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://pinocchio/locale/pinocchio.dtd">
+<overlay id="PinoOverlay"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="chrome://pinocchio/content/pino-overlay.js"/>
+
+	<menupopup id="viewSidebarMenu">
+    	<menuitem id="pMenuItem" observes="viewPinoSidebar" hidden="true"/>
+	</menupopup>
+	    
+	<!--keyset id="pMainKeyset">
+	<key id="key_openPinoSidebar" command="viewPinoSidebar"
+		key="&pino.sidebar.accesskey;" 
+		modifiers="&pino.sidebar.modifierskey;" />
+	</keyset-->
+
+	<broadcasterset id="mainBroadcasterSet"> <!-- Don't change the ID. -->
+		<broadcaster id="viewPinoSidebar"
+			label="&pino.sidebar.title;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			accesskey="&pino.sidebar.accesskey;"
+			sidebarurl="chrome://pinocchio/content/pino-sidebar.xul"
+			sidebartitle="&pino.sidebar.title;"
+			oncommand="toggleSidebar('viewPinoSidebar');"/>
+	</broadcasterset>
+
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="PinoSidebarButton"/>
+	</toolbarpalette>
+
+	<toolbarbutton id="PinoSidebarButton"
+  		label="&pino.sidebar.title;"
+		tooltiptext="&pino.sidebar.help;"
+		oncommand="if (event.target == this) pino.sidebar.show(false);">
+	</toolbarbutton>
+
+</overlay>
+
+
+
+
+

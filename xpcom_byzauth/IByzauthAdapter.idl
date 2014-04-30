@@ -1,0 +1,103 @@
+/**
+ *  Copyright (c) 2012 Stevens Institute of Technology. 
+ *  
+ *  All rights reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *	Author: Vivek Pathak
+ * 	Mon Jan 2 6:36:10 EDT 2012 
+ *
+ */
+
+#include "nsISupports.idl"
+
+[scriptable, uuid(f3774746-6f48-4f28-9dc9-cee3e5cef5a5)]
+interface IByzantineAuthenticationAdapter : nsISupports 
+{
+           // application calls the receive function to provide new message
+           // to the public key authentication library 
+      boolean 
+      receiveIncomingAuthenticationMessage(in string peer, in string mesg);
+
+
+           // application calls the send method to see if library has any
+           // outgoing messages for the given peers.  If yes, the message 
+           // is returned, else the js will see exception as C++ returns NS_ERROR 
+      string 
+      sendOutgoingAuthenticationMessage(in unsigned long count,
+                                        [array, size_is(count)] in string dest) ;
+
+      
+      boolean generateNewKeyPair(in unsigned long keybits); 
+
+
+           // user override for various trust decisions
+      boolean  setTrusted              (in string peer);
+      boolean  setUntrusted            (in string peer); 
+      boolean  setProbationary         (in string peer); 
+
+           // from mozillazine: If the IDL specifies a void return, the last out param of the IDL definition becomes your return value.
+      void     getTrusted              (out PRUint32 count, [retval, array, size_is(count)] out string trusted); 
+      void     getUntrusted            (out PRUint32 count, [retval, array, size_is(count)] out string untrusted); 
+      void     getProbationary         (out PRUint32 count, [retval, array, size_is(count)] out string probationary); 
+
+           // get the authenticated public key if is exists 
+           // note use of unknown, that will be true if we know nothing 
+           // about the peer 
+      string   getAuthenticatedKey     (in string peer, 
+                                        out long trust_value, 
+                                        out boolean unknown);
+      
+
+      void    getAuthenticators        (in string peer, 
+                                        out PRUint32 count, 
+                                        [retval, array, size_is(count)] out string authenticators) ; 
+
+      
+      
+
+           // start with no state
+      boolean  coldStart               (in long keybits, 
+                                        in string selfname, 
+                                        in unsigned long count, 
+                                        [array, size_is(count)] in string bootstrap,
+                                        in string serializefilename, 
+                                        in long ttl, 
+                                        in long tgshint,
+                                        in long payload); 
+
+
+
+           // start with state given as filename 
+      boolean warmStart                (in string serializefilename, 
+                                        in long ttl, 
+                                        in long tgshint, 
+                                        in long payload); 
+
+
+
+      boolean  Stop                    (); 
+
+
+           // sign and verify messages
+      string   Sign                    (in string mesg); 
+      boolean  Verify                  (in string mesg, 
+                                        in string sig, 
+                                        in string peer, 
+                                        out boolean unknown); 
+};
+
+ 
+      
+      
